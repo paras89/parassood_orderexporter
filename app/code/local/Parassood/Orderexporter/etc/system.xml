@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<config>
+<sections>
+    <orderexporter translate="label" module="orderexporter">
+        <label>Order Exporter Settings</label>
+        <tab>sales</tab>
+        <frontend_type>text</frontend_type>
+        <sort_order>301</sort_order>
+        <show_in_default>1</show_in_default>
+        <show_in_website>0</show_in_website>
+        <show_in_store>0</show_in_store>
+        <groups>
+            <orderexport_settings translate="label">
+                <label>Hourly Order Exporter Settings</label>
+                <frontend_type>text</frontend_type>
+                <sort_order>2</sort_order>
+                <show_in_default>1</show_in_default>
+                <show_in_website>0</show_in_website>
+                <show_in_store>0</show_in_store>
+                <fields>
+                    <active translate="label">
+                        <label>Enabled</label>
+                        <frontend_type>select</frontend_type>
+                        <source_model>adminhtml/system_config_source_yesno</source_model>
+                        <sort_order>0</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>0</show_in_website>
+                        <show_in_store>0</show_in_store>
+                    </active>
+                    <grid_filter translate="label">
+                        <label>Use Grid filters</label>
+                        <comment>Set Yes to use default order grid filters in export than hourly export.</comment>
+                        <frontend_type>select</frontend_type>
+                        <source_model>adminhtml/system_config_source_yesno</source_model>
+                        <sort_order>1</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>0</show_in_website>
+                        <show_in_store>0</show_in_store>
+                    </grid_filter>
+                    <hour_export translate="label">
+                        <label>Use Grid filters</label>
+                        <comment> <![CDATA[
+						Set the number of hours to extract orders from, default 1.<br/>
+						Value should be a positive integer.]]>
+                        </comment>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>1</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>0</show_in_website>
+                        <show_in_store>0</show_in_store>
+                    </hour_export>
+                </fields>
+            </orderexport_settings>
+        </groups>
+    </orderexporter>
+</sections>
+</config>
