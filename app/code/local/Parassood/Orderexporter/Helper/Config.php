@@ -76,6 +76,9 @@ class Parassood_Orderexporter_Helper_Config extends Mage_Core_Helper_Abstract
                 Mage::throwException($message);
             }
             $mageEntity = $this->_entities[$key];
+            /*  From order address entity we need to remove shipping/billing identifier. */
+            $mageEntity = explode('.',$mageEntity);
+            $mageEntity = $mageEntity[0];
             if (!array_key_exists('fields', $entity) || !is_array($entity['fields'])) {
                // Empty child node added to entity node. Nothing to do here. Continue.
                 continue;
