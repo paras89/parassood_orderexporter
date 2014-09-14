@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Parassood_Orderexporter>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Parassood_Orderexporter>
+    </modules>
+</config>
