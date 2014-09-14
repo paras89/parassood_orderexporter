@@ -38,7 +38,7 @@
                         <show_in_store>0</show_in_store>
                     </grid_filter>
                     <hour_export translate="label">
-                        <label>Use Grid filters</label>
+                        <label>Hour Limit</label>
                         <comment> <![CDATA[
 						Set the number of hours to extract orders from, default 1.<br/>
 						Value should be a positive integer.]]>
@@ -49,6 +49,26 @@
                         <show_in_website>0</show_in_website>
                         <show_in_store>0</show_in_store>
                     </hour_export>
+                    <file translate="label comment">
+                        <label>File</label>
+                        <comment><![CDATA[File saved in <strong><span style="color: red;">var/uploads</span></strong> folder.]]></comment>
+                        <frontend_type>file</frontend_type>
+                        <backend_model>orderexporter/system_config_backend_file</backend_model>
+                        <upload_dir>var/uploads</upload_dir>
+                        <sort_order>50</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>0</show_in_website>
+                        <show_in_store>0</show_in_store>
+                    </file>
+                    <download translate="label">
+                        <label>View Sample Configuration XML</label>
+                        <frontend_type>button</frontend_type>
+                        <frontend_model>orderexporter/adminhtml_button</frontend_model>
+                        <sort_order>20</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                    </download>
                 </fields>
             </orderexport_settings>
         </groups>

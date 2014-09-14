@@ -4,6 +4,8 @@
 class Parassood_Orderexporter_Block_Adminhtml_Sales_Order_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
 
+    protected $_exportLayout = null;
+
 
     public function __construct()
     {
@@ -27,95 +29,15 @@ class Parassood_Orderexporter_Block_Adminhtml_Sales_Order_Grid extends Mage_Admi
 
     protected function _prepareCollection()
     {
+        $this->_exportLayout = Mage::helper('orderexporter/config')->getExportLayout();
         $collection = Mage::getResourceModel($this->_getCollectionClass());
         $collection->addHourlyFilter();
+        $collection->addAlreadyExportedFilter();
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
 
-    protected function _prepareColumns()
-    {
 
-        $this->addColumn('real_order_id', array(
-            'header'=> Mage::helper('sales')->__('Order #'),
-            'width' => '80px',
-            'type'  => 'text',
-            'index' => 'increment_id',
-        ));
-
-        if (!Mage::app()->isSingleStoreMode()) {
-            $this->addColumn('store_id', array(
-                'header'    => Mage::helper('sales')->__('Purchased From (Store)'),
-                'index'     => 'store_id',
-                'type'      => 'store',
-                'store_view'=> true,
-                'display_deleted' => true,
-            ));
-        }
-
-        $this->addColumn('created_at', array(
-            'header' => Mage::helper('sales')->__('Purchased On'),
-            'index' => 'created_at',
-            'type' => 'datetime',
-            'width' => '100px',
-        ));
-
-        $this->addColumn('billing_name', array(
-            'header' => Mage::helper('sales')->__('Bill to Name'),
-            'index' => 'billing_name',
-        ));
-
-        $this->addColumn('shipping_name', array(
-            'header' => Mage::helper('sales')->__('Ship to Name'),
-            'index' => 'shipping_name',
-        ));
-
-        $this->addColumn('base_grand_total', array(
-            'header' => Mage::helper('sales')->__('G.T. (Base)'),
-            'index' => 'base_grand_total',
-            'type'  => 'currency',
-            'currency' => 'base_currency_code',
-        ));
-
-        $this->addColumn('grand_total', array(
-            'header' => Mage::helper('sales')->__('G.T. (Purchased)'),
-            'index' => 'grand_total',
-            'type'  => 'currency',
-            'currency' => 'order_currency_code',
-        ));
-
-        $this->addColumn('status', array(
-            'header' => Mage::helper('sales')->__('Status'),
-            'index' => 'status',
-            'type'  => 'options',
-            'width' => '70px',
-            'options' => Mage::getSingleton('sales/order_config')->getStatuses(),
-        ));
-
-        if (Mage::getSingleton('admin/session')->isAllowed('sales/order/actions/view')) {
-            $this->addColumn('action',
-                array(
-                    'header'    => Mage::helper('sales')->__('Action'),
-                    'width'     => '50px',
-                    'type'      => 'action',
-                    'getter'     => 'getId',
-                    'actions'   => array(
-                        array(
-                            'caption' => Mage::helper('sales')->__('View'),
-                            'url'     => array('base'=>'*/sales_order/view'),
-                            'field'   => 'order_id',
-                            'data-column' => 'action',
-                        )
-                    ),
-                    'filter'    => false,
-                    'sortable'  => false,
-                    'index'     => 'stores',
-                    'is_system' => true,
-                ));
-        }
-
-        return parent::_prepareColumns();
-    }
 
 
     /**
@@ -128,11 +50,11 @@ class Parassood_Orderexporter_Block_Adminhtml_Sales_Order_Grid extends Mage_Admi
     {
         $orderItems = $order->getAllItems() ;
         $row = array();
-        foreach ($this->_columns as $column) {
-            if (!$column->getIsSystem()) {
-                $row[] = $column->getRowFieldExport($order);
-            }
-        }
+        //Magic Happens here.
+        $exportLayout = $this->_exportLayout;
+        $exportLayout = $exportLayout->asArray();
+
+
         $row = $this->_exportCsvOrderWithItem($row,$orderItems,$adapter);
 
     }
@@ -145,9 +67,8 @@ class Parassood_Orderexporter_Block_Adminhtml_Sales_Order_Grid extends Mage_Admi
     protected function _getExportHeaders()
     {
         $row = parent::_getExportHeaders();
-        //add more export headers
+        $row = Mage::helper('orderexporter/config')->getCsvHeaders();
         return $row;
-
     }
 
     /**

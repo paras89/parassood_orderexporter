@@ -62,25 +62,6 @@
                 </observers>
             </adminhtml_block_html_before>
         </events>
-        <acl>
-            <resources>
-                <admin>
-                    <children>
-                        <system>
-                            <children>
-                                <config>
-                                    <children>
-                                        <orderexporter>
-                                            <title>Order Exporter</title>
-                                        </orderexporter>
-                                    </children>
-                                </config>
-                            </children>
-                        </system>
-                    </children>
-                </admin>
-            </resources>
-        </acl>
     </adminhtml>
     <admin>
     <routers>
@@ -93,6 +74,95 @@
         </adminhtml>
     </routers>
     </admin>
+    <default>
+        <tab1>
+            <general>
+                <text_field>Default value</text_field>
+                <textarea></textarea>
+                <dropdown>key2</dropdown>
+                <multiple_dropdown>key1,key2</multiple_dropdown>
+                <time>11,30,45</time>
+                <active>0</active>
+                <boolean>1</boolean>
+                <dependant_text_field>Default value</dependant_text_field>
+            </general>
+        </tab1>
+    </default>
+    <default_fields>
+        <entities>
+            <sales_order>
+                <fields>
+                   <increment_id>
+                     <label>Order Id</label>
+                     <sort_order>1</sort_order>
+                    </increment_id>
+                    <created_at>
+                        <label>Created At</label>
+                        <sort_order>2</sort_order>
+                    </created_at>
+                </fields>
+            </sales_order>
+            <product>
+                <fields>
+                    <name>
+                        <label>Name</label>
+                        <sort_order>3</sort_order>
+                    </name>
+                </fields>
+            </product>
+            <sales_order_item>
+                <fields>
+                    <sku>
+                        <label>SKU</label>
+                        <sort_order>3</sort_order>
+                    </sku>
+                    <price>
+                        <label>Price</label>
+                        <sort_order>4</sort_order>
+                    </price>
+                    <qty_ordered>
+                        <label>Ordered Quantity</label>
+                        <sort_order>5</sort_order>
+                    </qty_ordered>
+                    <discount_amount>
+                        <label>Item Discount</label>
+                        <sort_order>6</sort_order>
+                    </discount_amount>
+                </fields>
+            </sales_order_item>
+            <shipping_address>
+                <fields>
+                    <street>
+                        <label>Shipping Street Address 1</label>
+                        <sort_order>7</sort_order>
+                    </street>
+                    <telephone>
+                        <label>Telephone</label>
+                        <sort_order>8</sort_order>
+                    </telephone>
+                    <firstname>
+                        <label>Shipping First Name</label>
+                        <sort_order>9</sort_order>
+                    </firstname>
+                </fields>
+            </shipping_address>
+            <billing_address>
+                <fields>
+                    <street>
+                        <label>Billing Street Address 1</label>
+                        <sort_order>10</sort_order>
+                    </street>
+                    <firstname>
+                        <label>Billing First Name</label>
+                        <sort_order>12</sort_order>
+                    </firstname>
+                </fields>
+            </billing_address>
+            <sales_payment>
+                <fields></fields>
+            </sales_payment>
+        </entities>
+    </default_fields>
 </config>
 
 
