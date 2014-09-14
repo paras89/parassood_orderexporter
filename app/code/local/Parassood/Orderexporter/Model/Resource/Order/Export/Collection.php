@@ -21,7 +21,7 @@ class  Parassood_Orderexporter_Model_Resource_Order_Export_Collection extends Ma
          $hourReport = $helper->getExportHours();
          $time = time();
          $to = date('Y-m-d H:i:s', $time);
-         $lastTime = $time - 3600 * $hourReport; // 1 Hour filter.
+         $lastTime = $time - 3600 * $hourReport;
          $from = date('Y-m-d H:i:s', $lastTime);
          $this->addAttributeToFilter('created_at', array('from' => $from, 'to' => $to));
 

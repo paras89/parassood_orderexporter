@@ -26,4 +26,19 @@ class Parassood_Orderexporter_Helper_Data extends Mage_Core_Helper_Abstract
 
         return 1;
     }
+
+    /**
+     * Mark an order as exported so that it is not pulled out in next export.
+     * @param $order
+     * @return $this
+     */
+    public function markOrderAsExported($order)
+    {
+        $exportOrder = Mage::getModel('orderexporter/exportorders')->load($order->getId(),'order_id');
+        $exportOrder->setIsExported(1)
+                    ->setOrderId($order->getId())
+                    ->setExportedAt(now())
+                    ->save();
+        return $this;
+    }
 }
